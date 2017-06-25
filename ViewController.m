@@ -188,8 +188,6 @@ double longitude;
 }
 
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -205,8 +203,6 @@ double longitude;
     NSLog(@"NewLongitude =%f",newLocation.coordinate.longitude);
     NSLog(@"OldLatitude = %f",oldLocation.coordinate.latitude );
     NSLog(@"OldLongitude =%f",oldLocation.coordinate.longitude);
-    //longitude = newLocation.coordinate.longitude;
-    //latitude = newLocation.coordinate.latitude;
 }
 
 -(void)locationManager:(CLLocationManager *)manager
@@ -223,22 +219,56 @@ didFinishDeferredUpdatesWithError:(NSError *)error{
     {
         case kCLErrorNetwork: // general, network-related error
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"please check your network connection or that you are not in airplane mode" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-            //[alert release];
+            UIAlertController * alert=   [UIAlertController
+                                          alertControllerWithTitle:@"Error"
+                                          message:@"please check your network connection or that you are not in airplane mode"
+                                          preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* cancel = [UIAlertAction
+                                     actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                         
+                                     }];
+            [alert addAction:cancel];
         }
             break;
         case kCLErrorDenied:{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"user has denied to use current Location " delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
             //[alert release];
+            UIAlertController * alert=   [UIAlertController
+                                          alertControllerWithTitle:@"Error"
+                                          message:@"user has denied to use current Location "
+                                          preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* cancel = [UIAlertAction
+                                     actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                         
+                                     }];
+            [alert addAction:cancel];
+
         }
             break;
         default:
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"unknown network error" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
             //[alert release];
+            UIAlertController * alert=   [UIAlertController
+                                          alertControllerWithTitle:@"Error"
+                                          message:@"unknown network error"
+                                          preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* cancel = [UIAlertAction
+                                     actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                         
+                                     }];
+            [alert addAction:cancel];
+
         }
             break;
     }
