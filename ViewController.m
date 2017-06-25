@@ -295,21 +295,15 @@ didFinishDeferredUpdatesWithError:(NSError *)error{
 
 -(void)zoomInMapView:(id)sender
 {
-    if (currentZoom <= mapView.maxZoom) {
-        currentZoom = currentZoom + 1;
-        
-        [self ZoominOutMap:currentZoom];
-    }
+    GMSCameraUpdate *zoomCamera = [GMSCameraUpdate zoomIn];
+    [mapView animateWithCameraUpdate:zoomCamera];
    
 }
 
 -(void) zoomOutMapView:(id)sender
 {
-    if (currentZoom >= mapView.minZoom) {
-        currentZoom = currentZoom - 1;
-        
-        [self ZoominOutMap:currentZoom];
-    }
+    GMSCameraUpdate *zoomCamera = [GMSCameraUpdate zoomOut];
+    [mapView animateWithCameraUpdate:zoomCamera];
     
 }
 
